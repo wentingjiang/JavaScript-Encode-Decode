@@ -114,6 +114,3 @@ function Byte2String(byte){
 }
 console.log(String2Byte(''))
 console.log(Byte2String([]));
-</script>
-</body>
-</html>
