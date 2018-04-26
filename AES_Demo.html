@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="AES.js"></script>
+</head>
+
+<body>
+<script>  
+	
+var str1 = Encrypt("购物网", "12345678");
+console.log(str1);
+
+var str2 = Decrypt(str1, "12345678");
+console.log(str2);
+	
+function Encrypt(decryptStr, key){
+	key = CryptoJS.enc.Utf8.parse(key); 
+	var encryptedData = CryptoJS.AES.encrypt(decryptStr, key, {  
+        mode: CryptoJS.mode.ECB,  
+        padding: CryptoJS.pad.Pkcs7  
+    });
+	
+	return encryptedData;
+}
+  
+function Decrypt(encryptStr, key){
+	key = CryptoJS.enc.Utf8.parse(key); 
+	//encryptStr = encryptStr.ciphertext.toString();
+	//encryptStr = CryptoJS.enc.Hex.parse(encryptStr);  
+    //encryptStr = CryptoJS.enc.Base64.stringify(encryptStr); 
+
+	
+	var decryptedData = CryptoJS.AES.decrypt(encryptStr, key, {  
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7  
+    });
+	decryptedData = decryptedData.toString(CryptoJS.enc.Utf8);
+	return decryptedData;
+}
+/*	
+    var key = CryptoJS.enc.Utf8.parse("8NONwyJtHesysWpM");  
+  
+    var plaintText = 'ABCDEFGH'; // 明文  
+  
+    var encryptedData = CryptoJS.AES.encrypt(plaintText, key, {  
+        mode: CryptoJS.mode.ECB,  
+        padding: CryptoJS.pad.Pkcs7  
+    });  
+  
+    console.log("加密前："+plaintText);  
+    console.log("加密后："+encryptedData);  
+  
+    encryptedData = encryptedData.ciphertext.toString();  
+  
+    var encryptedHexStr = CryptoJS.enc.Hex.parse(encryptedData);  
+    var encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);  
+  
+    var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, key, {  
+        mode: CryptoJS.mode.ECB,  
+        padding: CryptoJS.pad.Pkcs7  
+    });  
+  
+    var decryptedStr = decryptedData.toString(CryptoJS.enc.Utf8);  
+  
+    console.log("解密后:"+decryptedStr);  
+  
+      
+     var pwd = "PCsUFtgog9/qpqmqXsuCRQ==";  
+    //加密服务端返回的数据  
+    var decryptedData = CryptoJS.AES.decrypt(pwd, key, {  
+        mode: CryptoJS.mode.ECB,  
+        padding: CryptoJS.pad.Pkcs7  
+    });  
+      
+    console.log("解密服务端返回的数据:"+decryptedStr); */
+</script>  
+</body>
+</html>
